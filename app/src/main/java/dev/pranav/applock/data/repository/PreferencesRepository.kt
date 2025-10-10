@@ -138,30 +138,6 @@ class PreferencesRepository(context: Context) {
         }
     }
 
-    // App State
-    fun isShowCommunityLink(): Boolean {
-        return !settingsPrefs.getBoolean(KEY_COMMUNITY_LINK_SHOWN, false)
-    }
-
-    fun setCommunityLinkShown(shown: Boolean) {
-        settingsPrefs.edit { putBoolean(KEY_COMMUNITY_LINK_SHOWN, shown) }
-    }
-
-    fun isShowDonateLink(context: Context): Boolean {
-        val currentVersionCode = try {
-            context.packageManager.getPackageInfo(context.packageName, 0).versionCode
-        } catch (e: Exception) {
-            return false
-        }
-
-        val savedVersionCode = settingsPrefs.getInt(LAST_VERSION_CODE, -1)
-
-        if (currentVersionCode > savedVersionCode) {
-            settingsPrefs.edit { putInt(LAST_VERSION_CODE, currentVersionCode) }
-            return true
-        }
-        return false
-    }
 
     companion object {
         private const val PREFS_NAME_APP_LOCK = "app_lock_prefs"
@@ -177,8 +153,6 @@ class PreferencesRepository(context: Context) {
         private const val KEY_UNLOCK_TIME_DURATION = "unlock_time_duration"
         private const val KEY_BACKEND_IMPLEMENTATION = "backend_implementation"
         private const val KEY_FALLBACK_BACKEND = "fallback_backend"
-        private const val KEY_COMMUNITY_LINK_SHOWN = "community_link_shown"
-        private const val LAST_VERSION_CODE = "last_version_code"
         private const val KEY_APPLOCK_ENABLED = "applock_enabled"
         private const val KEY_AUTO_UNLOCK = "auto_unlock"
         private const val KEY_UNLOCK_BEHAVIOR = "unlock_behavior"

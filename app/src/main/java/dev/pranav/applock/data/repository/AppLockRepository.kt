@@ -78,10 +78,6 @@ class AppLockRepository(private val context: Context) {
 
     fun getFallbackBackend(): BackendImplementation = preferencesRepository.getFallbackBackend()
 
-    // Delegate app state operations
-    fun isShowCommunityLink(): Boolean = preferencesRepository.isShowCommunityLink()
-    fun setCommunityLinkShown(shown: Boolean) = preferencesRepository.setCommunityLinkShown(shown)
-    fun isShowDonateLink(): Boolean = preferencesRepository.isShowDonateLink(context)
 
     // Backend service management
     fun setActiveBackend(backend: BackendImplementation) =

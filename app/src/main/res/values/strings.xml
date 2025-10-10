@@ -98,12 +98,6 @@ Make sure you have Shizuku installed and enabled via ADB. Tap \'Next\' to grant 
     <string name="main_screen_overlay_permission_open_settings_button">Open Settings</string>
     <string name="main_screen_shizuku_manual_permission_toast">Please grant Shizuku permission manually</string>
     <string name="main_screen_device_admin_explanation">App Lock requires Device Admin permission to prevent uninstallation. It will not affect your device\'s functionality.</string>
-    <string name="main_screen_join_community_dialog_title">Join the Community</string>
-    <string name="main_screen_join_community_dialog_text">Join our discord community for updates and support.</string>
-    <string name="main_screen_join_community_join_discord_button">Join Discord</string>
-    <string name="main_screen_join_community_dismiss_button">Dismiss</string>
-    <string name="main_screen_support_development_dialog_title">Support Development</string>
-    <string name="main_screen_support_development_donate_button">Donate</string>
     <string name="main_screen_app_protection_cd">App Protection</string>
     <string name="main_screen_settings_cd">Settings</string>
     <string name="main_screen_loading_applications_text">Loading applications…</string>
@@ -115,9 +109,6 @@ Make sure you have Shizuku installed and enabled via ADB. Tap \'Next\' to grant 
     <!-- SettingsScreen -->
     <string name="settings_screen_title">Settings</string>
     <string name="settings_screen_back_cd">Back</string>
-    <string name="settings_screen_support_development_dialog_title">Support Development</string>
-    <string name="support_development_text">Hi, I\'m Pranav, the developer of App Lock. I\'m a student developer passionate about creating useful apps. If you find it helpful, please consider supporting its development with a small donation. Any amount is greatly appreciated and helps me continue to improve the app and work on new features. Thank you for your support!</string>
-    <string name="settings_screen_support_development_donate_button">Donate</string>
     <string name="settings_screen_permission_required_dialog_title">Permission Required</string>
     <string name="settings_screen_permission_required_dialog_text">To enable Anti-Uninstall, App Lock requires two permissions: Device Administrator and Accessibility Service. These are necessary to prevent unauthorized uninstallation and ensure robust protection. Would you like to proceed with granting these permissions?</string>
     <string name="settings_screen_permission_required_proceed_button">Proceed</string>
@@ -170,8 +161,6 @@ Make sure you have Shizuku installed and enabled via ADB. Tap \'Next\' to grant 
     <string name="settings_screen_developer_name">Pranav Purwar</string>
     <string name="settings_screen_source_code_title">Source Code</string>
     <string name="settings_screen_source_code_desc">View the source code on GitHub</string>
-    <string name="settings_screen_support_development_title">Support Development</string>
-    <string name="settings_screen_support_development_desc">Help support the development of this app</string>
 
     <!-- AppLockUtils.kt -->
     <string name="utils_battery_ignore_toast">Please allow our app to ignore battery optimizations.</string>
@@ -213,7 +202,6 @@ Make sure you have Shizuku installed and enabled via ADB. Tap \'Next\' to grant 
     </string>
     <string name="accessibility_guide_open_settings_button">Open Settings</string>
     <string name="settings_screen_about_and_support_title">About &amp; Support</string>
-    <string name="settings_screen_join_community_title">Join Community</string>
     <string name="settings_screen_unlock_duration_summary_minutes">%1$d minutes</string>
     <string name="settings_screen_unlock_duration_summary_immediate">Lock immediately</string>
     <string name="settings_screen_biometric_auth_desc_available">Use fingerprint or face unlock to

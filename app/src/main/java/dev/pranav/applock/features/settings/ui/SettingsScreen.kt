@@ -94,7 +94,6 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     val appLockRepository = remember { AppLockRepository(context) }
-    var showDialog by remember { mutableStateOf(false) }
     var showUnlockTimeDialog by remember { mutableStateOf(false) }
 
     val shizukuPermissionLauncher =
@@ -148,32 +147,6 @@ fun SettingsScreen(
         biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK or BiometricManager.Authenticators.BIOMETRIC_STRONG) == BiometricManager.BIOMETRIC_SUCCESS
     }
 
-    if (showDialog) {
-        AlertDialog(
-            onDismissRequest = { showDialog = false },
-            title = { Text(stringResource(R.string.settings_screen_support_development_dialog_title)) },
-            text = { Text(stringResource(R.string.support_development_text)) },
-            confirmButton = {
-                FilledTonalButton(
-                    onClick = {
-                        context.startActivity(
-                            Intent(
-                                Intent.ACTION_VIEW,
-                                "https://pranavpurwar.github.io/donate.html".toUri()
-                            )
-                        )
-                        showDialog = false
-                    }
-                ) { Text(stringResource(R.string.settings_screen_support_development_donate_button)) }
-            },
-            dismissButton = {
-                TextButton(onClick = {
-                    showDialog = false
-                }) { Text(stringResource(R.string.cancel_button)) }
-            },
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
-        )
-    }
 
     if (showUnlockTimeDialog) {
         UnlockTimeDurationDialog(
@@ -440,11 +413,6 @@ fun SettingsScreen(
                 ) {
                     Column {
                         ActionSettingItem(
-                            icon = Icons.Filled.Favorite,
-                            title = stringResource(R.string.settings_screen_support_development_title),
-                            onClick = { showDialog = true })
-                        HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
-                        ActionSettingItem(
                             icon = Github,
                             title = stringResource(R.string.settings_screen_source_code_title),
                             onClick = {
@@ -452,18 +420,6 @@ fun SettingsScreen(
                                     Intent(
                                         Intent.ACTION_VIEW,
                                         "https://github.com/PranavPurwar/AppLock".toUri()
-                                    )
-                                )
-                            })
-                        HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
-                        ActionSettingItem(
-                            icon = Icons.Filled.Person,
-                            title = stringResource(R.string.settings_screen_join_community_title),
-                            onClick = {
-                                context.startActivity(
-                                    Intent(
-                                        Intent.ACTION_VIEW,
-                                        "https://discord.gg/46wCMRVAre".toUri()
                                     )
                                 )
                             })
