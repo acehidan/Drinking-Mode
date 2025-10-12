@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import dev.pranav.applock.AppLockApplication
 import dev.pranav.applock.features.appintro.ui.AppIntroScreen
 import dev.pranav.applock.features.applist.ui.MainScreen
+import dev.pranav.applock.features.home.ui.HomeScreen
 import dev.pranav.applock.features.lockscreen.ui.PasswordOverlayScreen
 import dev.pranav.applock.features.setpassword.ui.SetPasswordScreen
 import dev.pranav.applock.features.settings.ui.SettingsScreen
@@ -38,6 +39,10 @@ fun AppNavHost(navController: NavHostController, startDestination: String) {
                     scaleIn(initialScale = SCALE_INITIAL, animationSpec = tween(ANIMATION_DURATION))
         },
     ) {
+        composable(Screen.Home.route) {
+            HomeScreen(navController)
+        }
+
         composable(Screen.AppIntro.route) {
             AppIntroScreen(navController)
         }
@@ -147,5 +152,3 @@ private const val SCALE_INITIAL = 0.9f
 private const val BIOMETRIC_TITLE = "Confirm password"
 private const val BIOMETRIC_SUBTITLE = "Confirm biometric to continue"
 private const val BIOMETRIC_NEGATIVE_BUTTON = "Use PIN"
-
-

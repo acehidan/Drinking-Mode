@@ -16,3 +16,4 @@
 local.properties
 *.jks
 *.dm
+node_modules

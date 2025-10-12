@@ -16,7 +16,7 @@ class NavigationManager(private val context: Context) {
         return when {
             shouldShowAppIntro() -> Screen.AppIntro.route
             !isPasswordSet() -> Screen.SetPassword.route
-            else -> Screen.PasswordOverlay.route
+            else -> Screen.Home.route
         }
     }
 
@@ -42,7 +42,8 @@ class NavigationManager(private val context: Context) {
 
         private val ROUTES_THAT_SKIP_PASSWORD_CHECK = setOf(
             Screen.AppIntro.route,
-            Screen.SetPassword.route
+            Screen.SetPassword.route,
+            Screen.Home.route
         )
     }
 }

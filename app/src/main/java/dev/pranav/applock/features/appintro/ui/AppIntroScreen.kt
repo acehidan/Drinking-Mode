@@ -72,6 +72,7 @@ import dev.pranav.applock.ui.icons.BatterySaver
 import dev.pranav.applock.ui.icons.Display
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
+import dev.pranav.applock.features.appintro.ui.AppSelectionPage // Import the new AppSelectionPage
 
 enum class AppUsageMethod {
     ACCESSIBILITY,
@@ -207,15 +208,7 @@ fun AppIntroScreen(navController: NavController) {
             title = stringResource(R.string.welc_applock),
             description = stringResource(R.string.welcome_desc),
             icon = Icons.Filled.Lock,
-            backgroundColor = Color(0xFF0F52BA),
-            contentColor = Color.White,
-            onNext = { true }
-        ),
-        IntroPage(
-            title = stringResource(R.string.secure_apps),
-            description = stringResource(R.string.secure_apps_desc),
-            icon = Icons.Default.Lock,
-            backgroundColor = Color(0xFF3C9401),
+            backgroundColor = Color(0xFF01A87B),
             contentColor = Color.White,
             onNext = { true }
         ),
@@ -223,7 +216,7 @@ fun AppIntroScreen(navController: NavController) {
             title = stringResource(R.string.display_over_apps),
             description = stringResource(R.string.display_over_apps_desc),
             icon = Display,
-            backgroundColor = Color(0xFFDC143C),
+            backgroundColor = Color(0xFF01A87B),
             contentColor = Color.White,
             onNext = {
                 overlayPermissionGranted = Settings.canDrawOverlays(context)
@@ -247,7 +240,7 @@ fun AppIntroScreen(navController: NavController) {
             title = stringResource(R.string.disable_battery_optimization_title),
             description = stringResource(R.string.disable_battery_optimization_desc),
             icon = BatterySaver,
-            backgroundColor = Color(0xFF08A471),
+            backgroundColor = Color(0xFF01A87B),
             contentColor = Color.White,
             onNext = {
                 val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
@@ -266,7 +259,7 @@ fun AppIntroScreen(navController: NavController) {
                 stringResource(R.string.notif_perm_desc)
             else stringResource(R.string.notif_perm_granted),
             icon = Icons.Default.Notifications,
-            backgroundColor = Color(0xFFE78A02),
+            backgroundColor = Color(0xFF01A87B),
             contentColor = Color.White,
             onNext = {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -286,82 +279,13 @@ fun AppIntroScreen(navController: NavController) {
         )
     )
 
-    val methodSelectionPage = IntroPage(
-        title = stringResource(R.string.choose_app_detection),
-        description = stringResource(R.string.app_detection_desc),
-        icon = Icons.Default.Lock,
-        backgroundColor = Color(0xFF6B46C1),
-        contentColor = Color.White,
-        customContent = {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color(0xFF6B46C1))
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = stringResource(R.string.choose_app_detection),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    textAlign = TextAlign.Center
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                Text(
-                    text = stringResource(R.string.app_detection_desc),
-                    fontSize = 14.sp,
-                    lineHeight = 19.sp,
-                    color = Color.White.copy(alpha = 0.9f),
-                    textAlign = TextAlign.Center
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-
-                MethodSelectionCard(
-                    title = stringResource(R.string.accessibility_service_title),
-                    description = stringResource(R.string.accessibility_service_card_desc),
-                    icon = Accessibility,
-                    isSelected = selectedMethod == AppUsageMethod.ACCESSIBILITY,
-                    onClick = { selectedMethod = AppUsageMethod.ACCESSIBILITY },
-                )
-
-                MethodSelectionCard(
-                    title = stringResource(R.string.usage_stats_title),
-                    description = stringResource(R.string.usage_stats_card_desc),
-                    icon = Icons.Default.QueryStats,
-                    isSelected = selectedMethod == AppUsageMethod.USAGE_STATS,
-                    onClick = { selectedMethod = AppUsageMethod.USAGE_STATS },
-                )
-
-                MethodSelectionCard(
-                    title = stringResource(R.string.shizuku_service_title),
-                    description = stringResource(R.string.shizuku_service_card_desc),
-                    icon = Icons.Default.QueryStats,
-                    isSelected = selectedMethod == AppUsageMethod.SHIZUKU,
-                    onClick = { selectedMethod = AppUsageMethod.SHIZUKU },
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = stringResource(R.string.can_change_later_in_settings),
-                    fontSize = 12.sp,
-                    color = Color.White.copy(alpha = 0.7f),
-                    textAlign = TextAlign.Center
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-            }
-        },
-        onNext = { true }
-    )
-
     val methodSpecificPages = when (selectedMethod) {
         AppUsageMethod.ACCESSIBILITY -> listOf(
             IntroPage(
                 title = stringResource(R.string.accessibility_service_title),
                 description = stringResource(R.string.app_intro_accessibility_desc),
                 icon = Accessibility,
-                backgroundColor = Color(0xFFF1550E),
+                backgroundColor = Color(0xFF01A87B),
                 contentColor = Color.White,
                 onNext = {
                     accessibilityServiceEnabled = context.isAccessibilityServiceEnabled()
@@ -384,7 +308,7 @@ fun AppIntroScreen(navController: NavController) {
                 title = stringResource(R.string.app_intro_usage_stats_title),
                 description = stringResource(R.string.app_intro_usage_stats_desc),
                 icon = Icons.Default.QueryStats,
-                backgroundColor = Color(0xFFB453A4),
+                backgroundColor = Color(0xFF01A87B),
                 contentColor = Color.White,
                 onNext = {
                     usageStatsPermissionGranted = context.hasUsagePermission()
@@ -410,7 +334,7 @@ fun AppIntroScreen(navController: NavController) {
                 title = stringResource(R.string.shizuku_service_title),
                 description = stringResource(R.string.app_intro_shizuku_desc),
                 icon = Icons.Default.QueryStats,
-                backgroundColor = Color(0xFFCE5151),
+                backgroundColor = Color(0xFF01A87B),
                 contentColor = Color.White,
                 onNext = {
                     val isGranted = if (Shizuku.isPreV11()) {
@@ -442,11 +366,23 @@ fun AppIntroScreen(navController: NavController) {
         )
     }
 
+    val appSelectionPage = IntroPage(
+        title = stringResource(R.string.lets_build_safe_zone),
+        description = stringResource(R.string.restrict_apps_description),
+        icon = Icons.Filled.Lock, // You can choose a different icon if preferred
+        backgroundColor = Color(0xFFF5F5DC), // Beige background to match screenshot
+        contentColor = Color(0xFF388E3C), // Dark green text
+        customContent = {
+            AppSelectionPage()
+        },
+        onNext = { true } // Always return true, as selection is handled within AppSelectionPage
+    )
+
     val finalPage = IntroPage(
         title = stringResource(R.string.app_intro_complete_privacy_title),
         description = stringResource(R.string.app_intro_complete_privacy_desc),
         icon = Icons.Default.Lock,
-        backgroundColor = Color(0xFF0047AB),
+        backgroundColor = Color(0xFF01A87B),
         contentColor = Color.White,
         onNext = {
             overlayPermissionGranted = Settings.canDrawOverlays(context)
@@ -489,7 +425,7 @@ fun AppIntroScreen(navController: NavController) {
     )
 
     val allPages =
-        basicPages + methodSelectionPage + methodSpecificPages + finalPage
+        basicPages + methodSpecificPages + appSelectionPage + finalPage
 
     AppIntro(
         pages = allPages,
