@@ -304,12 +304,12 @@ fun SetPasswordScreen(
                                                 Toast.LENGTH_SHORT
                                             ).show()
 
-                                            navController.navigate(Screen.Main.route) {
+                                            navController.navigate(Screen.Home.route) {
                                                 popUpTo(Screen.SetPassword.route) {
                                                     inclusive = true
                                                 }
                                                 if (isFirstTimeSetup) {
-                                                    popUpTo(Screen.AppIntro.route) {
+                                                    popUpTo(Screen.Home.route) {
                                                         inclusive = true
                                                     }
                                                 }

@@ -20,6 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,25 +48,48 @@ fun AppSelectionPage(
         selectedApps = appLockRepository.getLockedApps()
     }
 
-    LazyColumn(
-        modifier = Modifier.fillMaxSize().background(Color(0xFFF5F5DC)),
-        contentPadding = PaddingValues(bottom = 90.dp) // Increased bottom padding
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFF5F5DC)), // Beige background
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items(apps.toList(), key = { it.packageName }) { appInfo ->
-            AppItem(
-                appInfo = appInfo,
-                isSelected = selectedApps.contains(appInfo.packageName),
-                onCheckedChange = { isChecked ->
-                    val packageName = appInfo.packageName
-                    if (isChecked) {
-                        appLockRepository.addLockedApp(packageName)
-                        selectedApps = selectedApps + packageName
-                    } else {
-                        appLockRepository.removeLockedApp(packageName)
-                        selectedApps = selectedApps - packageName
+        Text(
+            text = stringResource(R.string.lets_build_safe_zone),
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF388E3C), // Dark Green
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp, bottom = 8.dp)
+        )
+        Text(
+            text = stringResource(R.string.restrict_apps_description),
+            fontSize = 16.sp,
+            color = Color.DarkGray,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+        )
+
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 120.dp)
+        ) {
+            items(apps.toList(), key = { it.packageName }) { appInfo ->
+                AppItem(
+                    appInfo = appInfo,
+                    isSelected = selectedApps.contains(appInfo.packageName),
+                    onCheckedChange = { isChecked ->
+                        val packageName = appInfo.packageName
+                        if (isChecked) {
+                            appLockRepository.addLockedApp(packageName)
+                            selectedApps = selectedApps + packageName
+                        } else {
+                            appLockRepository.removeLockedApp(packageName)
+                            selectedApps = selectedApps - packageName
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     }
 }
@@ -85,9 +109,8 @@ private fun AppItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color(0xFFF5F5DC)) // Match parent background
             .clickable { onCheckedChange(!isSelected) }
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {

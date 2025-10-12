@@ -373,7 +373,9 @@ fun AppIntroScreen(navController: NavController) {
         backgroundColor = Color(0xFFF5F5DC), // Beige background to match screenshot
         contentColor = Color(0xFF388E3C), // Dark green text
         customContent = {
-            AppSelectionPage()
+            Column(modifier = Modifier.fillMaxSize().padding(bottom = 120.dp)) {
+                AppSelectionPage()
+            }
         },
         onNext = { true } // Always return true, as selection is handled within AppSelectionPage
     )
