@@ -67,6 +67,10 @@ Make sure you have Shizuku installed and enabled via ADB. Tap \'Next\' to grant 
     <string name="add_button">Add</string>
     <string name="most_people_restrict_this_app">Most People restrict this app</string>
 
+    <!-- New strings for Menu -->
+    <string name="menu_header">“Over Half Of The University Students Experienced Blackouts While Drunk”</string>
+    <string name="menu_subtitle">Drinking Knowledge</string>
+
     <!-- PasswordOverlayScreen -->
     <string name="default_app_name">App</string>
     <string name="this_app">this app</string>

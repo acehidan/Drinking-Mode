@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,6 +25,7 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalBottomSheet
@@ -40,18 +42,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import dev.pranav.applock.R
+import dev.pranav.applock.core.navigation.Screen
 import dev.pranav.applock.core.utils.appLockRepository
 import dev.pranav.applock.core.utils.isAccessibilityServiceEnabled
 import dev.pranav.applock.core.utils.openAccessibilitySettings
 import dev.pranav.applock.data.repository.BackendImplementation
-import dev.pranav.applock.features.applist.ui.MenuBottomSheetContent
 import dev.pranav.applock.ui.components.AccessibilityServiceGuideDialog
+import dev.pranav.applock.ui.theme.AppTypography
+import dev.pranav.applock.ui.theme.GothamFontFamily
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,7 +69,7 @@ fun HomeScreen(navController: NavController) {
     val appLockRepository = context.appLockRepository()
     var isAppLockEnabled by remember { mutableStateOf(appLockRepository.isProtectEnabled()) }
     var showBottomSheet by remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var showAccessibilityDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
@@ -123,7 +132,7 @@ private fun CasualScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFF5F5DC))
-            .padding(16.dp),
+            .padding(top = 32.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
@@ -134,35 +143,37 @@ private fun CasualScreen(
             Text(
                 text = "Drinking Mode",
                 fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
+                fontSize = 24.sp,
             )
             Button(
                 onClick = { /*TODO*/ },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF32CD32))
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF01AB7B))
             ) {
                 Text(text = "Get Consult")
             }
         }
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(64.dp))
         Text(
             text = "This is Casual Mode.",
             color = Color(0xFF32CD32),
             fontWeight = FontWeight.Bold,
-            fontSize = 16.sp
+            fontSize = 20.sp,
+            fontFamily = GothamFontFamily
         )
-        Spacer(modifier = Modifier.height(16.dp))
+//        Spacer(modifier = Modifier.height(5.dp))
         Image(
             painter = painterResource(id = R.drawable.casual_mode_illustration),
             contentDescription = null,
             modifier = Modifier.size(400.dp)
         )
-        Spacer(modifier = Modifier.height(16.dp))
+//        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = "Party? Celebrate with your loved ones..",
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp,
             modifier = Modifier.padding(horizontal = 32.dp),
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            fontFamily = GothamFontFamily
         )
         Spacer(modifier = Modifier.weight(1f))
         Row(
@@ -225,7 +236,7 @@ private fun ActivatedScreen(onDeactivate: () -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF00A86B))
-            .padding(16.dp),
+            .padding(top = 32.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
@@ -237,7 +248,7 @@ private fun ActivatedScreen(onDeactivate: () -> Unit) {
                 text = "Drinking Mode",
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
-                color = Color.White
+                color = Color.White,
             )
             Button(
                 onClick = { /*TODO*/ },
@@ -251,7 +262,8 @@ private fun ActivatedScreen(onDeactivate: () -> Unit) {
             text = "Casual Mode Activated.",
             color = Color.White,
             fontWeight = FontWeight.Bold,
-            fontSize = 18.sp
+            fontSize = 18.sp,
+            fontFamily = GothamFontFamily
         )
         Spacer(modifier = Modifier.height(16.dp))
         Image(
@@ -264,8 +276,9 @@ private fun ActivatedScreen(onDeactivate: () -> Unit) {
             text = "Have Fun Drinking\nwith your friends.",
             color = Color.White,
             fontWeight = FontWeight.Bold,
-            fontSize = 22.sp,
-            textAlign = TextAlign.Center
+            fontSize = 24.sp,
+            textAlign = TextAlign.Center,
+            fontFamily = GothamFontFamily
         )
         Spacer(modifier = Modifier.weight(1f))
 
@@ -281,5 +294,84 @@ private fun ActivatedScreen(onDeactivate: () -> Unit) {
             Icon(Icons.Default.Lock, contentDescription = "Locked", tint = Color.White)
         }
         Spacer(modifier = Modifier.height(32.dp))
+    }
+}
+
+@Composable
+internal fun MenuBottomSheetContent(navController: NavController, onDismiss: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 32.dp, vertical = 48.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp)
+    ) {
+        Column(modifier = Modifier.padding(bottom = 16.dp)) {
+            Text(
+                buildAnnotatedString {
+                    append("\"Over Half Of The University Students Experienced ")
+                    withStyle(style = SpanStyle(color = Color(0xFF32CD32))) {
+                        append("Blackouts")
+                    }
+                    append(" While Drunk\"")
+                },
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                lineHeight = 48.sp
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Drinking Knowledge",
+                color = Color.White,
+                fontSize = 14.sp
+            )
+        }
+        HorizontalDivider(color = Color.Gray, thickness = 1.dp)
+
+        Text(
+            "Home",
+            color = Color(0xFFF5F5DC), // Creamy white
+            fontWeight = FontWeight.Bold,
+            fontSize = 22.sp,
+            modifier = Modifier.clickable {
+                onDismiss()
+                navController.navigate(Screen.Home.route) {
+                    popUpTo(Screen.Home.route) { inclusive = true }
+                    launchSingleTop = true
+                }
+            }
+        )
+        Text(
+            "App List",
+            color = Color(0xFFF5F5DC),
+            fontWeight = FontWeight.Bold,
+            fontSize = 22.sp,
+            modifier = Modifier.clickable {
+                onDismiss()
+                navController.navigate(Screen.Main.route) {
+                    popUpTo(Screen.Main.route) { inclusive = true }
+                    launchSingleTop = true
+                }
+            }
+        )
+        Column {
+            Text(
+                "Community",
+                color = Color.Gray, // Disabled look
+                fontWeight = FontWeight.Bold,
+                fontSize = 22.sp,
+            )
+            Text("Coming Soon", color = Color.Gray, fontSize = 14.sp)
+        }
+        Text(
+            "Setting",
+            color = Color(0xFFF5F5DC),
+            fontWeight = FontWeight.Bold,
+            fontSize = 22.sp,
+            modifier = Modifier.clickable {
+                onDismiss()
+                navController.navigate(Screen.Settings.route)
+            }
+        )
     }
 }

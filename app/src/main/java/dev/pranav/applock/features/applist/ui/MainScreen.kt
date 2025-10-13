@@ -28,6 +28,7 @@ import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -50,8 +51,11 @@ import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
@@ -68,7 +72,7 @@ fun MainScreen(
 ) {
     val isLoading by mainViewModel.isLoading.collectAsState()
     var showBottomSheet by remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -125,14 +129,15 @@ private fun LoadingContent(modifier: Modifier = Modifier) {
         ) {
             CircularProgressIndicator(
                 modifier = Modifier.size(48.dp),
-                color = MaterialTheme.colorScheme.primary,
+                color = Color(0xFF01A87B),
                 strokeWidth = 4.dp
             )
             Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = stringResource(R.string.main_screen_loading_applications_text),
                 style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = Color.Black,
+                fontWeight = FontWeight.Bold
             )
         }
     }
@@ -198,7 +203,7 @@ private fun AppItem(
         Surface(
             modifier = Modifier.size(42.dp),
             shape = RoundedCornerShape(8.dp), // Make icon background square
-            color = MaterialTheme.colorScheme.surfaceContainerHigh
+
         ) {
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -220,14 +225,14 @@ private fun AppItem(
                 text = appName,
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = Color.Black,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
             Text(
                 text = "Most People restrict this app",
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = Color(0xFF161616),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -255,6 +260,29 @@ internal fun MenuBottomSheetContent(navController: NavController, onDismiss: () 
             .padding(horizontal = 32.dp, vertical = 48.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
+        Column(modifier = Modifier.padding(bottom = 16.dp)) {
+            Text(
+                buildAnnotatedString {
+                    append("\"Over Half Of The University Students Experienced ")
+                    withStyle(style = SpanStyle(color = Color(0xFF32CD32))) {
+                        append("Blackouts")
+                    }
+                    append(" While Drunk\"")
+                },
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                lineHeight = 48.sp
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = stringResource(R.string.menu_subtitle),
+                color = Color.Gray,
+                fontSize = 14.sp
+            )
+        }
+        HorizontalDivider(color = Color.Gray, thickness = 1.dp)
+
         Text(
             "Home",
             color = Color(0xFFF5F5DC), // Creamy white

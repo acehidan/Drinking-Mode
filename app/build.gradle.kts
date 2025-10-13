@@ -59,6 +59,8 @@ android {
 dependencies {
     implementation(project(":appintro"))
     implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.6.0")
+    implementation("com.google.android.gms:play-services-base:18.4.0")
     
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

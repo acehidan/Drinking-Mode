@@ -36,7 +36,7 @@ fun AppLockTheme(
 
     MaterialExpressiveTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = AppTypography, // Use the custom typography
         shapes = shapes,
         content = content,
         motionScheme = MotionScheme.expressive()
