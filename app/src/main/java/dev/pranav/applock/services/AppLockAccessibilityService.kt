@@ -95,14 +95,12 @@ class AppLockAccessibilityService : AccessibilityService() {
                     // when user switches apps with recents
 
                     if (event.packageName != AppLockManager.temporarilyUnlockedApp && event.packageName !in appLockRepository.getTriggerExcludedApps()) {
-                        Log.d(TAG, "Removing ${AppLockManager.temporarilyUnlockedApp}")
                         AppLockManager.clearTemporarilyUnlockedApp()
                     }
                 }
 
                 (event.contentChangeTypes == AccessibilityEvent.CONTENT_CHANGE_TYPE_PANE_DISAPPEARED && event.packageName == getSystemDefaultLauncherPackageName()) -> {
                     // when user presses home, ie goes to home screen from recents
-                    Log.d(TAG, "Removing ${AppLockManager.temporarilyUnlockedApp}, recents to home")
                     AppLockManager.clearTemporarilyUnlockedApp()
                     recentsOpen = false
                 }
@@ -110,7 +108,6 @@ class AppLockAccessibilityService : AccessibilityService() {
                 (event.packageName == getSystemDefaultLauncherPackageName() && event.className == "com.android.launcher3.uioverrides.QuickstepLauncher") && event.text.toString()
                     .lowercase().contains("home screen") -> {
                     // when user presses home, ie goes to home screen from recents
-                    Log.d(TAG, "Removing ${AppLockManager.temporarilyUnlockedApp}, home button")
                     AppLockManager.clearTemporarilyUnlockedApp()
                     recentsOpen = false
                 }
@@ -164,24 +161,22 @@ class AppLockAccessibilityService : AccessibilityService() {
         if (packageName !in appLockRepository.getLockedApps()) return
 
         if (AppLockManager.isAppTemporarilyUnlocked(packageName)) return
-        AppLockManager.clearTemporarilyUnlockedApp()
-
+        
         val unlockDurationMinutes = appLockRepository.getUnlockTimeDuration()
         val unlockTimestamp = AppLockManager.appUnlockTimes[packageName] ?: 0L
 
         if (unlockDurationMinutes > 0 && unlockTimestamp > 0) {
             val durationMillis = unlockDurationMinutes * 60 * 1000L
             if (currentTime - unlockTimestamp < durationMillis) {
-                AppLockManager.unlockApp(packageName)
                 return
             }
 
             AppLockManager.appUnlockTimes.remove(packageName)
-            AppLockManager.clearTemporarilyUnlockedApp()
         }
 
         Log.d(TAG, "Locked app detected: $packageName. Showing overlay.")
         AppLockManager.isLockScreenShown.set(true)
+        AppLockManager.clearTemporarilyUnlockedApp()
 
         val intent = Intent(this, PasswordOverlayActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or

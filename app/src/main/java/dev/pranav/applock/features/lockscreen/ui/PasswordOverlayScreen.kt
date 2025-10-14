@@ -130,13 +130,13 @@ class PasswordOverlayActivity : FragmentActivity() {
     }
 
     private fun setupWindow() {
+        setShowWhenLocked(true)
+        setTurnScreenOn(true)
         window.addFlags(
             WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
                     WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
                     WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
         )
-        setShowWhenLocked(true)
-        setTurnScreenOn(true)
 
         val layoutParams = window.attributes
         layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
