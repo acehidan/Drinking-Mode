@@ -9,6 +9,7 @@ import androidx.activity.addCallback
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -69,6 +70,7 @@ import dev.pranav.applock.R
 import dev.pranav.applock.core.ui.shapes
 import dev.pranav.applock.core.utils.appLockRepository
 import dev.pranav.applock.core.utils.vibrate
+import dev.pranav.applock.data.model.LockType
 import dev.pranav.applock.data.repository.AppLockRepository
 import dev.pranav.applock.services.AppLockManager
 import dev.pranav.applock.ui.icons.Backspace
@@ -93,6 +95,8 @@ class PasswordOverlayActivity : FragmentActivity() {
 
     private val TAG = "PasswordOverlayActivity"
 
+    private val typingGameViewModel: TypingGameViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -107,6 +111,21 @@ class PasswordOverlayActivity : FragmentActivity() {
         enableEdgeToEdge()
 
         appLockRepository = AppLockRepository(applicationContext)
+
+        // Check if the app is ready to be locked
+        val lockType = appLockRepository.getLockType()
+        val isReadyToLock = when (lockType) {
+            LockType.PIN -> appLockRepository.getPassword() != null
+            LockType.TYPING_GAME -> true // Typing game is always ready
+        }
+
+        if (!appLockRepository.isProtectEnabled() || !isReadyToLock) {
+            // If not ready to lock, unlock the app and finish activity to prevent getting stuck
+            Log.w(TAG, "App is not ready for locking. Unlocking and finishing.")
+            onUnlockSuccess()
+            return
+        }
+
 
         onBackPressedDispatcher.addCallback(this) {
             // Prevent back navigation to maintain security
@@ -124,7 +143,7 @@ class PasswordOverlayActivity : FragmentActivity() {
     override fun onPostResume() {
         super.onPostResume()
         setupBiometricPromptInternal()
-        if (appLockRepository.isBiometricAuthEnabled()) {
+        if (appLockRepository.isBiometricAuthEnabled() && appLockRepository.getLockType() == LockType.PIN) {
             triggerBiometricPrompt()
         }
     }
@@ -160,52 +179,70 @@ class PasswordOverlayActivity : FragmentActivity() {
         setupUI()
     }
 
-    private fun setupUI() {
-        val onPinAttemptCallback = { pin: String ->
-            val isValid = appLockRepository.validatePassword(pin)
-            if (isValid) {
-                lockedPackageNameFromIntent?.let { pkgName ->
-                    AppLockManager.unlockApp(pkgName)
+    private fun onUnlockSuccess() {
+        lockedPackageNameFromIntent?.let { pkgName ->
+            AppLockManager.unlockApp(pkgName)
 
-                    when (appLockRepository.getUnlockBehavior()) {
-                        0 -> {
-                            finishAndRemoveTask()
-                        }
+            when (appLockRepository.getUnlockBehavior()) {
+                0 -> {
+                    finishAndRemoveTask()
+                }
 
-                        1 -> {
-                            val intent = packageManager.getLaunchIntentForPackage(pkgName)
-                            if (intent != null) {
-                                intent.addFlags(
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or
-                                            Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                                )
-                                startActivity(intent)
-                            } else {
-                                Log.e(TAG, "No launch intent found for package: $pkgName")
-                            }
-                            finishAffinity()
-                        }
+                1 -> {
+                    val intent = packageManager.getLaunchIntentForPackage(pkgName)
+                    if (intent != null) {
+                        intent.addFlags(
+                            Intent.FLAG_ACTIVITY_NEW_TASK or
+                                    Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                        )
+                        startActivity(intent)
+                    } else {
+                        Log.e(TAG, "No launch intent found for package: $pkgName")
                     }
+                    finishAffinity()
                 }
             }
-            isValid
         }
+    }
 
+    private fun setupUI() {
         setContent {
             AppLockTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    contentColor = MaterialTheme.colorScheme.primaryContainer
-                ) { innerPadding ->
-                    PasswordOverlayScreen(
-                        modifier = Modifier.padding(innerPadding),
-                        showBiometricButton = appLockRepository.isBiometricAuthEnabled(),
-                        fromMainActivity = false,
-                        onBiometricAuth = { triggerBiometricPrompt() },
-                        onAuthSuccess = {},
-                        lockedAppName = appName,
-                        triggeringPackageName = triggeringPackageNameFromIntent,
-                        onPinAttempt = onPinAttemptCallback
+                val lockType = appLockRepository.getLockType()
+
+                if (lockType == LockType.PIN) {
+                    Scaffold(
+                        modifier = Modifier.fillMaxSize(),
+                        contentColor = MaterialTheme.colorScheme.primaryContainer
+                    ) { innerPadding ->
+                        PasswordOverlayScreen(
+                            modifier = Modifier.padding(innerPadding),
+                            showBiometricButton = appLockRepository.isBiometricAuthEnabled(),
+                            fromMainActivity = false,
+                            onBiometricAuth = { triggerBiometricPrompt() },
+                            onAuthSuccess = {},
+                            lockedAppName = appName,
+                            triggeringPackageName = triggeringPackageNameFromIntent,
+                            onPinAttempt = { pin ->
+                                val isValid = appLockRepository.validatePassword(pin)
+                                if (isValid) {
+                                    onUnlockSuccess()
+                                }
+                                isValid
+                            }
+                        )
+                    }
+                } else {
+                    TypingGameLockScreen(
+                        viewModel = typingGameViewModel,
+                        onWordAttempt = { word ->
+                            val currentWordToType = typingGameViewModel.uiState.value.wordToType
+                            val isValid = word.equals(currentWordToType, ignoreCase = true)
+                            if (isValid) {
+                                onUnlockSuccess()
+                            }
+                            isValid
+                        }
                     )
                 }
             }

@@ -2,6 +2,7 @@ package dev.pranav.applock.data.repository
 
 import android.content.Context
 import dev.pranav.applock.data.manager.BackendServiceManager
+import dev.pranav.applock.data.model.LockType
 
 /**
  * Main repository that coordinates between different specialized repositories and managers.
@@ -12,6 +13,10 @@ class AppLockRepository(private val context: Context) {
     private val preferencesRepository = PreferencesRepository(context)
     private val lockedAppsRepository = LockedAppsRepository(context)
     private val backendServiceManager = BackendServiceManager(context)
+
+    // Delegate lock type operations
+    fun getLockType(): LockType = preferencesRepository.getLockType()
+    fun setLockType(lockType: LockType) = preferencesRepository.setLockType(lockType)
 
     // Delegate locked apps operations
     fun getLockedApps(): Set<String> = lockedAppsRepository.getLockedApps()

@@ -1,5 +1,6 @@
 package dev.pranav.applock.features.home.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -56,6 +57,7 @@ import dev.pranav.applock.core.navigation.Screen
 import dev.pranav.applock.core.utils.appLockRepository
 import dev.pranav.applock.core.utils.isAccessibilityServiceEnabled
 import dev.pranav.applock.core.utils.openAccessibilitySettings
+import dev.pranav.applock.data.model.LockType
 import dev.pranav.applock.data.repository.BackendImplementation
 import dev.pranav.applock.ui.components.AccessibilityServiceGuideDialog
 import dev.pranav.applock.ui.theme.AppTypography
@@ -92,7 +94,11 @@ fun HomeScreen(navController: NavController) {
                 isAppLockEnabled = true
                 appLockRepository.setProtectEnabled(true)
             },
-            onShowMenu = { showBottomSheet = true }
+            onShowMenu = { showBottomSheet = true },
+            onSwitchLockType = {
+                appLockRepository.setLockType(LockType.TYPING_GAME)
+                Toast.makeText(context, "Switched to Typing Game Lock", Toast.LENGTH_SHORT).show()
+            }
         )
     }
 
@@ -126,7 +132,8 @@ fun HomeScreen(navController: NavController) {
 private fun CasualScreen(
     navController: NavController,
     onActivate: () -> Unit,
-    onShowMenu: () -> Unit
+    onShowMenu: () -> Unit,
+    onSwitchLockType: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -199,7 +206,7 @@ private fun CasualScreen(
             Spacer(modifier = Modifier.weight(1f))
 
             IconButton(
-                onClick = { /* TODO */ },
+                onClick = onSwitchLockType,
                 modifier = Modifier
                     .size(56.dp)
                     .border(BorderStroke(1.dp, Color.Black), CircleShape)

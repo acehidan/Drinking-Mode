@@ -3,6 +3,7 @@ package dev.pranav.applock.data.repository
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import dev.pranav.applock.data.model.LockType
 
 /**
  * Repository for managing application preferences and settings.
@@ -15,6 +16,20 @@ class PreferencesRepository(context: Context) {
 
     private val settingsPrefs: SharedPreferences =
         context.getSharedPreferences(PREFS_NAME_SETTINGS, Context.MODE_PRIVATE)
+
+    // Lock Type Settings
+    fun setLockType(lockType: LockType) {
+        settingsPrefs.edit { putString(KEY_LOCK_TYPE, lockType.name) }
+    }
+
+    fun getLockType(): LockType {
+        val lockTypeName = settingsPrefs.getString(KEY_LOCK_TYPE, LockType.PIN.name)
+        return try {
+            LockType.valueOf(lockTypeName ?: LockType.PIN.name)
+        } catch (_: IllegalArgumentException) {
+            LockType.PIN
+        }
+    }
 
     // Authentication Settings
     fun setPassword(password: String) {
@@ -144,6 +159,7 @@ class PreferencesRepository(context: Context) {
         private const val PREFS_NAME_SETTINGS = "app_lock_settings"
 
         // Keys
+        private const val KEY_LOCK_TYPE = "lock_type"
         private const val KEY_PASSWORD = "password"
         private const val KEY_BIOMETRIC_AUTH_ENABLED = "use_biometric_auth"
         private const val KEY_PROMPT_FOR_BIOMETRIC_AUTH = "prompt_for_biometric_auth"
