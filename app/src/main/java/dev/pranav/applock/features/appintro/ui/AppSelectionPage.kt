@@ -40,56 +40,96 @@ fun AppSelectionPage(
     val appSearchManager = remember { AppSearchManager(context) }
     var apps by remember { mutableStateOf(emptySet<ApplicationInfo>()) }
     var selectedApps by remember { mutableStateOf(emptySet<String>()) }
+    var isLoading by remember { mutableStateOf(true) } // State to handle loading
 
     LaunchedEffect(key1 = Unit) {
+        isLoading = true
         apps = withContext(Dispatchers.IO) {
             appSearchManager.loadApps()
         }
         selectedApps = appLockRepository.getLockedApps()
+        isLoading = false
     }
 
-    Column(
+    if (isLoading) {
+        LoadingScreen()
+    } else {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0xFFFFFBE8)), // Beige background
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(R.string.lets_build_safe_zone),
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF388E3C), // Dark Green
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp, bottom = 8.dp)
+            )
+            Text(
+                text = stringResource(R.string.restrict_apps_description),
+                fontSize = 16.sp,
+                color = Color.DarkGray,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+            )
+
+            LazyColumn(
+                modifier = Modifier.weight(1f),
+                contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 120.dp)
+            ) {
+                items(apps.toList(), key = { it.packageName }) { appInfo ->
+                    AppItem(
+                        appInfo = appInfo,
+                        isSelected = selectedApps.contains(appInfo.packageName),
+                        onCheckedChange = { isChecked ->
+                            val packageName = appInfo.packageName
+                            if (isChecked) {
+                                appLockRepository.addLockedApp(packageName)
+                                selectedApps = selectedApps + packageName
+                            } else {
+                                appLockRepository.removeLockedApp(packageName)
+                                selectedApps = selectedApps - packageName
+                            }
+                        }
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun LoadingScreen() {
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F5DC)), // Beige background
-        horizontalAlignment = Alignment.CenterHorizontally
+            .background(Color(0xFFFFFBE8)), // Green background from image
+        contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = stringResource(R.string.lets_build_safe_zone),
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF388E3C), // Dark Green
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp, bottom = 8.dp)
-        )
-        Text(
-            text = stringResource(R.string.restrict_apps_description),
-            fontSize = 16.sp,
-            color = Color.DarkGray,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
-        )
-
-        LazyColumn(
-            modifier = Modifier.weight(1f),
-            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 120.dp)
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(horizontal = 24.dp)
         ) {
-            items(apps.toList(), key = { it.packageName }) { appInfo ->
-                AppItem(
-                    appInfo = appInfo,
-                    isSelected = selectedApps.contains(appInfo.packageName),
-                    onCheckedChange = { isChecked ->
-                        val packageName = appInfo.packageName
-                        if (isChecked) {
-                            appLockRepository.addLockedApp(packageName)
-                            selectedApps = selectedApps + packageName
-                        } else {
-                            appLockRepository.removeLockedApp(packageName)
-                            selectedApps = selectedApps - packageName
-                        }
-                    }
-                )
-            }
+            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                text = "Please wait\na moment ..",
+                color = Color(0xFF01A87B),
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                lineHeight = 40.sp
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                text = "\" A real chat with a friend gives your brain a better, healthier buzz than alcohol \"",
+                color = Color.White.copy(alpha = 0.8f),
+                fontSize = 16.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(bottom = 32.dp)
+            )
         }
     }
 }

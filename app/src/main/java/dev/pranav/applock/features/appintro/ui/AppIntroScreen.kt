@@ -208,16 +208,16 @@ fun AppIntroScreen(navController: NavController) {
             title = stringResource(R.string.welc_applock),
             description = stringResource(R.string.welcome_desc),
             icon = Icons.Filled.Lock,
-            backgroundColor = Color(0xFF01A87B),
-            contentColor = Color.White,
+            backgroundColor = Color(0xFFFFFBE8),
+            contentColor = Color(0xFF01A87B),
             onNext = { true }
         ),
         IntroPage(
             title = stringResource(R.string.display_over_apps),
             description = stringResource(R.string.display_over_apps_desc),
             icon = Display,
-            backgroundColor = Color(0xFF01A87B),
-            contentColor = Color.White,
+            backgroundColor = Color(0xFFFFFBE8),
+            contentColor = Color(0xFF01A87B),
             onNext = {
                 overlayPermissionGranted = Settings.canDrawOverlays(context)
                 if (!overlayPermissionGranted) {
@@ -240,8 +240,8 @@ fun AppIntroScreen(navController: NavController) {
             title = stringResource(R.string.disable_battery_optimization_title),
             description = stringResource(R.string.disable_battery_optimization_desc),
             icon = BatterySaver,
-            backgroundColor = Color(0xFF01A87B),
-            contentColor = Color.White,
+            backgroundColor = Color(0xFFFFFBE8),
+            contentColor = Color(0xFF01A87B),
             onNext = {
                 val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
                 val isIgnoringOptimizations =
@@ -259,8 +259,8 @@ fun AppIntroScreen(navController: NavController) {
                 stringResource(R.string.notif_perm_desc)
             else stringResource(R.string.notif_perm_granted),
             icon = Icons.Default.Notifications,
-            backgroundColor = Color(0xFF01A87B),
-            contentColor = Color.White,
+            backgroundColor = Color(0xFFFFFBE8),
+            contentColor = Color(0xFF01A87B),
             onNext = {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     val isGrantedCurrently =
@@ -285,8 +285,8 @@ fun AppIntroScreen(navController: NavController) {
                 title = stringResource(R.string.accessibility_service_title),
                 description = stringResource(R.string.app_intro_accessibility_desc),
                 icon = Accessibility,
-                backgroundColor = Color(0xFF01A87B),
-                contentColor = Color.White,
+                backgroundColor = Color(0xFFFFFBE8),
+                contentColor = Color(0xFF01A87B),
                 onNext = {
                     accessibilityServiceEnabled = context.isAccessibilityServiceEnabled()
                     if (!accessibilityServiceEnabled) {
@@ -308,8 +308,8 @@ fun AppIntroScreen(navController: NavController) {
                 title = stringResource(R.string.app_intro_usage_stats_title),
                 description = stringResource(R.string.app_intro_usage_stats_desc),
                 icon = Icons.Default.QueryStats,
-                backgroundColor = Color(0xFF01A87B),
-                contentColor = Color.White,
+                backgroundColor = Color(0xFFFFFBE8),
+                contentColor = Color(0xFF01A87B),
                 onNext = {
                     usageStatsPermissionGranted = context.hasUsagePermission()
                     if (!usageStatsPermissionGranted) {
@@ -334,8 +334,8 @@ fun AppIntroScreen(navController: NavController) {
                 title = stringResource(R.string.shizuku_service_title),
                 description = stringResource(R.string.app_intro_shizuku_desc),
                 icon = Icons.Default.QueryStats,
-                backgroundColor = Color(0xFF01A87B),
-                contentColor = Color.White,
+                backgroundColor = Color(0xFFFFFBE8),
+                contentColor = Color(0xFF01A87B),
                 onNext = {
                     val isGranted = if (Shizuku.isPreV11()) {
                         checkSelfPermission(
@@ -370,7 +370,7 @@ fun AppIntroScreen(navController: NavController) {
         title = stringResource(R.string.lets_build_safe_zone),
         description = stringResource(R.string.restrict_apps_description),
         icon = Icons.Filled.Lock, // You can choose a different icon if preferred
-        backgroundColor = Color(0xFFF5F5DC), // Beige background to match screenshot
+        backgroundColor = Color(0xFFFFFBE8), // Beige background to match screenshot
         contentColor = Color(0xFF388E3C), // Dark green text
         customContent = {
             Column(modifier = Modifier.fillMaxSize().padding(bottom = 120.dp)) {
@@ -384,8 +384,8 @@ fun AppIntroScreen(navController: NavController) {
         title = stringResource(R.string.app_intro_complete_privacy_title),
         description = stringResource(R.string.app_intro_complete_privacy_desc),
         icon = Icons.Default.Lock,
-        backgroundColor = Color(0xFF01A87B),
-        contentColor = Color.White,
+        backgroundColor = Color(0xFFFFFBE8),
+        contentColor = Color(0xFF01A87B),
         onNext = {
             overlayPermissionGranted = Settings.canDrawOverlays(context)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

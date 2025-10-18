@@ -20,6 +20,8 @@ import dev.pranav.applock.features.applist.ui.MainScreen
 import dev.pranav.applock.features.home.ui.HomeScreen
 import dev.pranav.applock.features.lockscreen.ui.PasswordOverlayScreen
 import dev.pranav.applock.features.setpassword.ui.SetPasswordScreen
+import dev.pranav.applock.features.settings.ui.ContactSupportScreen
+import dev.pranav.applock.features.settings.ui.LanguageScreen
 import dev.pranav.applock.features.settings.ui.SettingsScreen
 import dev.pranav.applock.features.triggerexclusions.ui.TriggerExclusionsScreen
 
@@ -77,12 +79,22 @@ fun AppNavHost(navController: NavHostController, startDestination: String) {
         composable(Screen.Settings.route) {
             SettingsScreen(navController)
         }
+        
+        composable(Screen.ContactSupport.route) {
+            ContactSupportScreen(navController)
+        }
+
+        composable(Screen.Language.route) {
+            LanguageScreen(navController)
+        }
 
         composable(Screen.TriggerExclusions.route) {
             TriggerExclusionsScreen(navController)
         }
     }
 }
+
+// ... (rest of the file remains the same)
 
 private fun handleBiometricAuthentication(
     context: FragmentActivity,

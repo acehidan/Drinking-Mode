@@ -4,7 +4,7 @@
     <style name="Theme.AppLock" parent="android:Theme.Material.Light.NoActionBar" />
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#00A86B</item>
+        <item name="windowSplashScreenBackground">#00A87B</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/app_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.AppLock</item>
     </style>

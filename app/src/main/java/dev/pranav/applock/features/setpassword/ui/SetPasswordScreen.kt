@@ -39,6 +39,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import dev.pranav.applock.AppLockApplication
 import dev.pranav.applock.R
 import dev.pranav.applock.core.navigation.Screen
@@ -304,15 +305,16 @@ fun SetPasswordScreen(
                                                 Toast.LENGTH_SHORT
                                             ).show()
 
-                                            navController.navigate(Screen.Home.route) {
-                                                popUpTo(Screen.SetPassword.route) {
-                                                    inclusive = true
-                                                }
-                                                if (isFirstTimeSetup) {
-                                                    popUpTo(Screen.Home.route) {
+                                            if (isFirstTimeSetup) {
+                                                navController.navigate(Screen.Home.route) {
+                                                    // This pops everything up to the start destination of the graph
+                                                    popUpTo(navController.graph.findStartDestination().id) {
                                                         inclusive = true
                                                     }
+                                                    launchSingleTop = true
                                                 }
+                                            } else {
+                                                navController.popBackStack()
                                             }
                                         } else {
                                             showMismatchError = true
