@@ -22,6 +22,7 @@ object AppLockConstants {
     )
 
     val EXCLUDED_APPS = setOf(
+        "com.miui.home",
         "com.android.systemui",
         "com.android.intentresolver",
         "com.google.android.permissioncontroller",

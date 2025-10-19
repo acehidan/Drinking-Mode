@@ -8,6 +8,8 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
@@ -73,6 +75,7 @@ class AppLockAccessibilityService : AccessibilityService() {
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
+        Log.d(TAG, "EVENT RECEIVED: Package=${event.packageName}, Class=${event.className}, Type=${AccessibilityEvent.eventTypeToString(event.eventType)}")
 
         if (appLockRepository.isAntiUninstallEnabled() && event.packageName == DEVICE_ADMIN_SETTINGS_PACKAGE) {
             checkForDeviceAdminDeactivation(event)
@@ -158,16 +161,25 @@ class AppLockAccessibilityService : AccessibilityService() {
 
     private fun checkAndLockApp(packageName: String, triggeringPackage: String, currentTime: Long) {
         if (AppLockManager.isLockScreenShown.get() || AppLockManager.currentBiometricState == BiometricState.AUTH_STARTED) return
-        if (packageName !in appLockRepository.getLockedApps()) return
+        Log.d(TAG, "CHECKING APP: '$packageName'")
+        Log.d(TAG, "Currently locked apps: ${appLockRepository.getLockedApps()}")
+        if (packageName !in appLockRepository.getLockedApps()) {
+            Log.w(TAG, "REASON TO NOT LOCK: App is not in the locked apps list.")
+            return
+        }
 
-        if (AppLockManager.isAppTemporarilyUnlocked(packageName)) return
-        
+        if (AppLockManager.isAppTemporarilyUnlocked(packageName)) {
+            Log.w(TAG, "REASON TO NOT LOCK: App is temporarily unlocked.")
+            return
+        }
+
         val unlockDurationMinutes = appLockRepository.getUnlockTimeDuration()
         val unlockTimestamp = AppLockManager.appUnlockTimes[packageName] ?: 0L
 
         if (unlockDurationMinutes > 0 && unlockTimestamp > 0) {
             val durationMillis = unlockDurationMinutes * 60 * 1000L
             if (currentTime - unlockTimestamp < durationMillis) {
+                Log.w(TAG, "REASON TO NOT LOCK: App is within the re-lock time limit.")
                 return
             }
 
@@ -188,12 +200,17 @@ class AppLockAccessibilityService : AccessibilityService() {
             putExtra("triggering_package", triggeringPackage)
         }
 
-        try {
-            startActivity(intent)
-        } catch (e: Exception) {
-            Log.e(TAG, "Failed to start password overlay: ${e.message}", e)
-            AppLockManager.isLockScreenShown.set(false)
-        }
+        // Use a handler to slightly delay the lock screen launch to avoid race conditions on some devices like MIUI
+        Handler(Looper.getMainLooper()).postDelayed({
+            try {
+                Log.i(TAG, "ALL CONDITIONS MET. Attempting to start Lock Screen for '$packageName'")
+                startActivity(intent)
+                Log.i(TAG, "startActivity() called successfully without crashing for '$packageName'")
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to start password overlay for '$packageName'", e) // Full stack trace
+                AppLockManager.isLockScreenShown.set(false)
+            }
+        }, 50) // 50ms delay
     }
 
     private fun checkForDeviceAdminDeactivation(event: AccessibilityEvent) {
