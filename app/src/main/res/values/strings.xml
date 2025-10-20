@@ -11,14 +11,14 @@
     <string name="choose_app_detection">Choose App Detection Method</string>
     <string name="app_detection_desc">Select how you want AppLock to detect when protected apps are launched.</string>
     <string name="notif_perm">Notification Permission</string>
-    <string name="notif_perm_desc">AppLock needs permission to show notifications to keep you informed and keep running in background properly. Tap \'Next\' to grant permission.</string>
+    <string name="notif_perm_desc">Drinking Mood needs permission to show notifications to keep you informed and keep running in background properly. Tap \'Next\' to grant permission.</string>
     <string name="notif_perm_granted">Notification permission is automatically granted on your Android version.</string>
     <string name="welc_applock">Welcome to Drinking Mode</string>
     <string name="welcome_desc">A safe space to help you look out for yourself. Let get you set up</string>
     <string name="secure_apps">Secure Your Apps</string>
     <string name="secure_apps_desc">Keep your private apps protected with advanced locking mechanisms</string>
     <string name="display_over_apps">Display Over Other Apps</string>
-    <string name="display_over_apps_desc">AppLock needs permission to display over other apps to show the lock screen. Tap \'Next\' and enable the permission.</string>
+    <string name="display_over_apps_desc">Drinking Mood needs permission to display over other apps to show the lock screen. Tap \'Next\' and enable the permission.</string>
 
     <!-- AppIntroScreen -->
     <string name="notification_permission_required_desc">Notification permission is required for AppLock to function properly.</string>
@@ -126,10 +126,10 @@ Make sure you have Shizuku installed and enabled via ADB. Tap \'Next\' to grant 
     <string name="settings_screen_permission_required_dialog_text">To enable Anti-Uninstall, App Lock requires two permissions: Device Administrator and Accessibility Service. These are necessary to prevent unauthorized uninstallation and ensure robust protection. Would you like to proceed with granting these permissions?</string>
     <string name="settings_screen_permission_required_proceed_button">Proceed</string>
     <string name="settings_screen_device_admin_dialog_title">Device Administrator Permission</string>
-    <string name="settings_screen_device_admin_dialog_text">App Lock needs Device Administrator permission to prevent unauthorized uninstallation. Please grant this permission in the next screen. This will not affect your device\'s normal functionality.</string>
+    <string name="settings_screen_device_admin_dialog_text">Drinking Mood needs Device Administrator permission to prevent unauthorized uninstallation. Please grant this permission in the next screen. This will not affect your device\'s normal functionality.</string>
     <string name="settings_screen_device_admin_grant_button">Grant Permission</string>
     <string name="settings_screen_accessibility_dialog_title">Accessibility Service Permission</string>
-    <string name="settings_screen_accessibility_dialog_text">App Lock also needs Accessibility Service permission to monitor app uninstallation attempts and re-activate Device Administrator if disabled. This ensures the Anti-Uninstall feature remains effective. Please enable the Accessibility Service for App Lock in the settings.</string>
+    <string name="settings_screen_accessibility_dialog_text">Drinking Mood also needs Accessibility Service permission to monitor app uninstallation attempts and re-activate Device Administrator if disabled. This ensures the Anti-Uninstall feature remains effective. Please enable the Accessibility Service for App Lock in the settings.</string>
     <string name="settings_screen_accessibility_open_settings_button">Open Settings</string>
     <string name="settings_screen_lock_screen_customization_title">Lock Screen Customization</string>
     <string name="settings_screen_max_brightness_title">Maximum Brightness</string>
