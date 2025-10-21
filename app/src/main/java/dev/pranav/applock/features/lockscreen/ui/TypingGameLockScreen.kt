@@ -222,16 +222,14 @@ fun CustomInputField(
                     .padding(horizontal = 24.dp, vertical = 16.dp),
                 contentAlignment = Alignment.CenterStart
             ) {
-                // Hint Text (placeholder)
-                if (value.text.isEmpty()) {
-                    Text(
-                        text = hintWord,
-                        style = TextStyle(fontSize = 28.sp),
-                        color = Color.White.copy(alpha = 0.5f)
-                    )
-                }
+                // Hint Text (placeholder) - Always visible
+                Text(
+                    text = hintWord,
+                    style = TextStyle(fontSize = 28.sp),
+                    color = Color.White.copy(alpha = 0.5f)
+                )
                 
-                // Actual text field
+                // Actual text field is drawn on top of the hint
                 innerTextField()
             }
         }
