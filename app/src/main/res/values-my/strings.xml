@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Drinking Mode</string>
+    <string name="get_consult">တိုင်ပင်ဆွေးနွေးရန်</string>
+    <string name="casual_mode_title">ဒါက Casual Mode</string>
+    <string name="casual_mode_subtitle">(ပေါ့ပေါ့ပါးပါး)</string>
+    <string name="casual_mode_description">ပါတီပွဲလား။ သင်ချစ်ခင်ရသူတွေနဲ့ ပျော်ရွှင်စွာ ဆင်နွှဲလိုက်ပါ။</string>
+    <string name="change_button">ပြောင်းမည်</string>
+    <string name="activate_button">Activate</string>
+</resources>
