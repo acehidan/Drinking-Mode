@@ -7,13 +7,13 @@ plugins {
 }
 
 android {
-    namespace = "dev.pranav.applock"
+    namespace = "dev.ace.applock"
     // Builds with Canary Preview won't work on non-Canary devices
     // compileSdkPreview = "CANARY"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "dev.pranav.applock"
+        applicationId = "dev.ace.applock"
         minSdk = 26
         targetSdk = 36
         // targetSdkPreview = "CANARY"
