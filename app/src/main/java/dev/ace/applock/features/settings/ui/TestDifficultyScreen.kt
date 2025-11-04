@@ -1,5 +1,6 @@
 package dev.ace.applock.features.settings.ui
 
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -15,7 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
@@ -25,6 +26,7 @@ import androidx.navigation.NavController
 import dev.ace.applock.AppLockApplication
 import dev.ace.applock.data.repository.Difficulty
 import dev.ace.applock.data.repository.PreferencesRepository
+import dev.ace.applock.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,7 +40,7 @@ fun TestDifficultyScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Serious Mode Settings", fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(id = R.string.text_difficulty_header), fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
@@ -59,20 +61,19 @@ fun TestDifficultyScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Select the game and difficulty you'll need to pass to unlock apps. Make it hard enough to stop your drunk self, but possible for you to pass when sober.",
-                textAlign = TextAlign.Center,
+                text = stringResource(id = R.string.text_difficulty_body),
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
             )
 
             Spacer(modifier = Modifier.height(32.dp))
 
             // Game Type Selection
-            SectionTitle(text = "Choose Game Type")
-            OptionSelector(
-                options = listOf("Math Game", "Typing Game"),
-                selectedOption = selectedGameType,
-                onOptionSelected = { selectedGameType = it }
-            )
+//            SectionTitle(text = "Choose Game Type")
+//            OptionSelector(
+//                options = listOf("Math Game", "Typing Game"),
+//                selectedOption = selectedGameType,
+//                onOptionSelected = { selectedGameType = it }
+//            )
 
             Spacer(modifier = Modifier.height(32.dp))
 

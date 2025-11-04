@@ -38,10 +38,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import dev.ace.applock.R
 import dev.ace.applock.core.navigation.Screen
 import dev.ace.applock.ui.components.MenuBottomSheetContent
 
@@ -72,51 +74,51 @@ fun SettingsScreen(navController: NavController) {
                 .padding(24.dp)
         ) {
             Text(
-                text = "Settings",
+                text = stringResource(id = R.string.settings_title),
                 fontSize = 32.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 24.dp)
             )
 
-            SettingsCard(title = "Safety") {
+            SettingsCard(title = stringResource(id = R.string.settings_section_safety)) {
                 SettingsRow(
                     icon = Icons.Default.Security,
-                    text = "Change Pin Code",
+                    text = stringResource(id = R.string.settings_item_change_pin),
                     onClick = { navController.navigate(Screen.ChangePassword.route) }
                 )
                 SettingsRow(
                     icon = Icons.Default.Vibration,
-                    text = "Test Difficulty",
+                    text = stringResource(id = R.string.settings_item_test_difficulty),
                     onClick = { navController.navigate(Screen.TestDifficulty.route) }
                 )
             }
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            SettingsCard(title = "Account") {
+            SettingsCard(title = stringResource(id = R.string.settings_section_account)) {
                 SettingsRow(
                     icon = Icons.Default.Policy,
-                    text = "Privacy & Policies",
+                    text = stringResource(id = R.string.settings_item_privacy_policy),
                     onClick = { /* TODO */ }
                 )
                 SettingsRow(
                     icon = Icons.Default.Policy, // Using same icon as placeholder
-                    text = "Terms & Conditions",
+                    text = stringResource(id = R.string.settings_item_terms_conditions),
                     onClick = { /* TODO */ }
                 )
                 SettingsRow(
                     icon = Icons.Default.SupportAgent,
-                    text = "Customer Support",
+                    text = stringResource(id = R.string.settings_item_customer_support),
                     onClick = { navController.navigate(Screen.ContactSupport.route) }
                 )
             }
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            SettingsCard(title = "In App") {
+            SettingsCard(title = stringResource(id = R.string.settings_section_in_app)) {
                 SettingsRow(
                     icon = Icons.Default.Language,
-                    text = "Languages",
+                    text = stringResource(id = R.string.settings_item_languages),
                     onClick = { navController.navigate(Screen.Language.route) }
                 )
             }

@@ -8,6 +8,61 @@
     <string name="change_button">Change</string>
     <string name="activate_button">Activate</string>
 
+    <string name="activated_casual_mode_title">Casual Mode Activated.</string>
+    <string name="activated_casual_mode_description">Have Fun Drinking\nwith your friends.</string>
+    <string name="locked_button">LOCKED</string>
+
+    <string name="serious_mode_title">This is Serious Mode.</string>
+    <string name="serious_mode_description">Are You Going To\nDrink Heavily Alone?</string>
+    <string name="activated_serious_mode_title">Serious Mode Activated.</string>
+    <string name="activated_serious_mode_description">Drink Well, Stay Safe.</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_section_safety">Safety</string>
+    <string name="settings_item_change_pin">Change Pin Code</string>
+    <string name="settings_item_test_difficulty">Test Difficulty</string>
+    <string name="settings_section_account">Account</string>
+    <string name="settings_item_privacy_policy">Privacy &amp; Policies</string>
+    <string name="settings_item_terms_conditions">Terms &amp; Conditions</string>
+    <string name="settings_item_customer_support">Customer Support</string>
+    <string name="settings_section_in_app">In App</string>
+    <string name="settings_item_languages">Languages</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_app_list">App List</string>
+    <string name="menu_community">Community</string>
+    <string name="menu_coming_soon">Coming Soon</string>
+    <string name="menu_settings">Setting</string>
+    <string name="menu_header_part1">"The confidence from a drink is just a rental. "</string>
+    <string name="menu_header_part2">The Real Confidence Is Yours To Own</string>
+    <string name="menu_subtitle">Drinking Knowledge</string>
+
+    <string-array name="motivational_quotes">
+        <item>"Over Half of the University students experienced Blackouts while drunk"</item>
+        <item>"It's okay to not be okay. Reaching out to someone is a sign of Strength, Not Weakness"</item>
+        <item>"Sometimes we drink to feel connected. A real conversation, even a short one, Works Way Better"</item>
+        <item>"The confidence from a drink is just a rental. The Real Confidence Is Yours To Own"</item>
+        <item>"Heavy drinking can mess with your deep sleep, which makes everything Feel Tougher The Next Day"</item>
+        <item>"A glass of water right now is a high-five to your future self. Seriously, They'll Thank You"</item>
+        <item>"Your body processes about one drink per hour. Anything more is just Waiting In Line to be processed"</item>
+        <item>"Drinking to forget something? Your brain is just hitting 'snooze' on the feeling, Not Deleting It"</item>
+        <item>"Feeling down? Alcohol is a depressant, so it can actually make loneliness feel Heavier Tomorrow"</item>
+        <item>"A Quick Text To A Friend can give you a better, longer-lasting buzz than the next drink"</item>
+    </string-array>
+
+    <string-array name="motivational_quotes_highlights">
+        <item>"Blackouts"</item>
+        <item>"Strength, Not Weakness"</item>
+        <item>"Works Way Better"</item>
+        <item>"The Real Confidence Is Yours To Own"</item>
+        <item>"Feel Tougher The Next Day"</item>
+        <item>"They'll Thank You"</item>
+        <item>"Waiting In Line"</item>
+        <item>"Not Deleting It"</item>
+        <item>"Heavier Tomorrow"</item>
+        <item>"A Quick Text To A Friend"</item>
+    </string-array>
+
     <string name="device_admin_description">Prevents unauthorized people from uninstalling the app.</string>
     <string name="accessibility_service_description">Allows App Lock to detect when protected apps are opened and show password verification.</string>
 
@@ -75,7 +130,6 @@ Make sure you have Shizuku installed and enabled via ADB. Tap \'Next\' to grant 
 
     <!-- New strings for Menu -->
     <string name="menu_header">“Over Half Of The University Students Experienced Blackouts While Drunk”</string>
-    <string name="menu_subtitle">Drinking Knowledge</string>
 
     <!-- PasswordOverlayScreen -->
     <string name="default_app_name">App</string>
@@ -180,6 +234,8 @@ Make sure you have Shizuku installed and enabled via ADB. Tap \'Next\' to grant 
     <string name="settings_screen_developer_name">Pranav Purwar</string>
     <string name="settings_screen_source_code_title">Source Code</string>
     <string name="settings_screen_source_code_desc">View the source code on GitHub</string>
+    <string name="text_difficulty_header">Serius Mode Settings</string>
+    <string name="text_difficulty_body">Select the game and difficulty you will need to pass to unlock apps. Make it hard enough to stop your drunk self, but possible for you to pass when sober.</string>
 
     <!-- AppLockUtils.kt -->
     <string name="utils_battery_ignore_toast">Please allow our app to ignore battery optimizations.</string>

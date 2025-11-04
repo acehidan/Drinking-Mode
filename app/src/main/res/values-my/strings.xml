@@ -7,4 +7,63 @@
     <string name="casual_mode_description">ပါတီပွဲလား။ သင်ချစ်ခင်ရသူတွေနဲ့ ပျော်ရွှင်စွာ ဆင်နွှဲလိုက်ပါ။</string>
     <string name="change_button">ပြောင်းမည်</string>
     <string name="activate_button">Activate</string>
+
+    <string name="activated_casual_mode_title">Casual Mode ကို ဖွင့်လိုက်ပါပြီ။</string>
+    <string name="activated_casual_mode_description">သူငယ်ချင်းတွေနဲ့ ပျော်ပျော်ရွှင်ရွှင်သောက်လိုက်ပါ။</string>
+    <string name="locked_button">လော့ခ်ချထားသည်</string>
+
+    <string name="serious_mode_title">ဒါက Serious Mode ဖြစ်ပါတယ်။</string>
+    <string name="serious_mode_description">တစ်ယောက်တည်း အများကြီးသောက်တော့မှာလား။</string>
+    <string name="activated_serious_mode_title">Serious Mode ကို ဖွင့်လိုက်ပါပြီ။</string>
+    <string name="activated_serious_mode_description">ကောင်းစွာသောက်သုံးပါ။ ဘေးကင်းစွာနေထိုင်ပါ။</string>
+
+    <string name="settings_title">ဆက်တင်များ</string>
+    <string name="settings_section_safety">လုံခြုံရေး</string>
+    <string name="settings_item_change_pin">PIN နံပါတ်ပြောင်းမည်</string>
+    <string name="settings_item_test_difficulty">အခက်အခဲ စမ်းသပ်မှု</string>
+    <string name="settings_section_account">အကောင့်</string>
+    <string name="settings_item_privacy_policy">ကိုယ်ရေးကိုယ်တာ မူဝါဒများ</string>
+    <string name="settings_item_terms_conditions">စည်းကမ်းနှင့် သတ်မှတ်ချက်များ</string>
+    <string name="settings_item_customer_support">သုံးစွဲသူ ဝန်ဆောင်မှု</string>
+    <string name="settings_section_in_app">App အတွင်း</string>
+    <string name="settings_item_languages">ဘာသာစကားများ</string>
+
+    <string name="menu_home">ပင်မစာမျက်နှာ</string>
+    <string name="menu_app_list">App စာရင်း</string>
+    <string name="menu_community">အဖွဲ့အစည်း</string>
+    <string name="menu_coming_soon">မကြာမီ လာမည်</string>
+    <string name="menu_settings">ဆက်တင်များ</string>
+    <string name="menu_header_part1">"သောက်ပြီးခါစ ယုံကြည်မှုက ခဏတာငှားရမ်းခြင်း মাত্র। "</string>
+    <string name="menu_header_part2">တကယ့်ယုံကြည်မှုက ကိုယ်ပိုင်သာဖြစ်သည်</string>
+    <string name="menu_subtitle">သောက်သုံးခြင်းဆိုင်ရာ ဗဟုသုတ</string>
+
+    <string name="text_difficulty_header">Serious Mode Setting များ</string>
+    <string name="text_difficulty_body">App တွေကို unlock လုပ်ဖို့ (ပြန်ဖွင့်ဖို့) ဖြေဆိုရမယ့် ဂိမ်းအမျိုးအစားနဲ့ အခက်အခဲအဆင့်ကို ရွေးချယ်ပါ။ ဒီစစ်ဆေးမှုကို သင်မူးနေချိန်မှာ မဖြေနိုင်လောက်အောင် ခက်သင့်ပြီး၊ သတိရှိနေချိန် (အမူးပြေချိန်) မှာတော့ ဖြေရှင်းနိုင်မယ့် အနေအထားမျိုးဖြစ်အောင် ရွေးချယ်ပါ။.</string>
+
+
+    <string-array name="motivational_quotes">
+        <item>"တက္ကသိုလ်ကျောင်းသား ထက်ဝက်ကျော်ဟာ အရက်မူးနေချိန်မှာ အသိလွတ်သွားတဲ့အထိ (Blackouts) ဖြစ်ဖူးကြပါတယ်။"</item>
+        <item>"အဆင်မပြေတဲ့အခါ 'ငါ အဆင်မပြေဘူး' လို့ ဝန်ခံတာက ရှက်စရာ မဟုတ်ပါဘူး။ တစ်ယောက်ယောက်ကို ရင်ဖွင့်တိုင်ပင်ခြင်းဟာ အားနည်းချက် မဟုတ်ပါဘူး၊ အဲဒါ ခွန်အားရှိခြင်းရဲ့ လက္ခဏာတစ်ခုပါ။"</item>
+        <item>“တစ်ခါတစ်ရံမှာ ကျွန်တော်တို့ဟာ ရင်းနှီးမှုရဖို့ သောက်တတ်ကြပါတယ်။ တကယ်တမ်းမှာ စစ်မှန်တဲ့ စကားလက်ဆုံကျခြင်းက၊ ခဏတာလေးပဲ ဖြစ်ဦးတောင်၊ အများကြီး ပိုအလုပ်ဖြစ်ပါတယ်။”</item>
+        <item> "အရက်ကနေ ရလာတဲ့ ယုံကြည်မှုက 'အငှား' သက်သက်ပါပဲ။ တကယ့် ယုံကြည်မှု အစစ်အမှန်ကတော့ သင်ကိုယ်တိုင် ပိုင်ဆိုင်ရမှာပါ။"</item>
+        <item>"အရက် အလွန်အကျွံ သောက်ခြင်းက သင့်ရဲ့ နှစ်နှစ်ခြိုက်ခြိုက် အိပ်စက်ခြင်း (Deep Sleep) ကို အနှောင့်အယှက် ဖြစ်စေနိုင်ပါတယ်။ ဒါက နောက်တစ်နေ့မှာ အရာရာတိုင်းကို ပိုပြီး ခက်ခဲပင်ပန်းတယ်လို့ ခံစားရစေပါတယ်။"</item>
+        <item>"အခု ရေတစ်ခွက် သောက်လိုက်ခြင်းက အနာဂတ်က သင့်ကိုယ်သင် လက်ခုပ်တီး(high-five) ဂုဏ်ပြုလိုက်တာနဲ့ တူတူပါပဲ။ တကယ်ပြောတာ၊ နောင်မှာ သင့်ကိုယ်သင် ကျေးဇူးပြန်တင်မိပါလိမ့်မယ်။"</item>
+        <item>"သင့်ခန္ဓာကိုယ်က တစ်နာရီကို အရက်တစ်ခွက်စာနှုန်းလောက်ပဲ ချေဖျက်နိုင်ပါတယ်။ အဲ့ဒီထက် ပိုသောက်မိတာမှန်သမျှဟာ ချေဖျက်ဖို့ တန်းစီစောင့်ဆိုင်းနေရသလိုပါပဲ။ "</item>
+        <item>"တစ်ခုခုကို မေ့ပစ်ဖို့ သောက်နေတာလား။ တကယ်တော့ သင့်ဦးနှောက်က အဲ့ဒီခံစားချက်ကို 'ဖျက်ပစ်လိုက်တာ' မဟုတ်ပါဘူး။ ခဏ 'snooze' နှိပ်ပြီး အိပ်ခိုင်းထားတာမျိုးပါပဲ"</item>
+        <item>"စိတ်ဓာတ်ကျနေသလား။ အရက်ဟာ စိတ်ကျစေတဲ့အရာ (depressant) ဖြစ်လို့ မနက်ဖြန်မှာ တစ်ယောက်တည်း အထီးကျန်ဆန်မှုကို ပိုပြီးလေးလံလာစေနိုင်ပါတယ်။"</item>
+        <item>"သူငယ်ချင်းတစ်ယောက်ဆီ စာတစ်ကြောင်းလောက် ပို့လိုက်ခြင်းက သင်သောက်မယ့် နောက်ထပ်အရက်တစ်ခွက်က ပေးတာထက် ပိုကောင်းပြီး ပိုကြာရှည်ခံတဲ့ လန်းဆန်းတက်ကြွမှုကို ပေးနိုင်ပါတယ်။"</item>
+    </string-array>
+
+    <string-array name="motivational_quotes_highlights">
+        <item>"အသိလွတ်သွားတဲ့အထိ"</item>
+        <item>"အဲဒါ ခွန်အားရှိခြင်းရဲ့ လက္ခဏာတစ်ခုပါ"</item>
+        <item>"အများကြီး ပိုအလုပ်ဖြစ်ပါတယ်"</item>
+        <item>"ယုံကြည်မှု အစစ်အမှန်ကတော့ သင်ကိုယ်တိုင် ပိုင်ဆိုင်ရမှာပါ။"</item>
+        <item>"အရာရာတိုင်းကို ပိုပြီး ခက်ခဲပင်ပန်းတယ်"</item>
+        <item>"နောင်မှာ သင့်ကိုယ်သင် ကျေးဇူးပြန်တင်မိပါလိမ့်မယ်။"</item>
+        <item>" တန်းစီစောင့်ဆိုင်းနေရသလိုပါပဲ။"</item>
+        <item>"ဖျက်ပစ်လိုက်တာ မဟုတ်ပါဘူး"</item>
+        <item>"ပိုပြီးလေးလံလာစေနိုင်ပါတယ်"</item>
+        <item>"သူငယ်ချင်းတစ်ယောက်ဆီ စာတစ်ကြောင်းလောက် ပို့လိုက်ခြင်းက"</item>
+    </string-array>
 </resources>

@@ -85,13 +85,13 @@ fun LanguageScreen(navController: NavController) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             LanguageItem(
-                icon = painterResource(id = R.drawable.ic_flag_uk),
+                icon = painterResource(id = R.drawable.ic_flag_myanmar),
                 text = "English",
                 isSelected = selectedLanguage == "English",
                 onClick = { onLanguageSelected("English") }
             )
             LanguageItem(
-                icon = painterResource(id = R.drawable.ic_flag_myanmar),
+                icon = painterResource(id = R.drawable.ic_flag_uk),
                 text = "Myanmar",
                 isSelected = selectedLanguage == "Myanmar",
                 onClick = { onLanguageSelected("Myanmar") }

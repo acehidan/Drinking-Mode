@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">음주 모드</string>
+    <string name="get_consult">상담 받기</string>
+    <string name="casual_mode_title">이것은 캐주얼 모드입니다.</string>
+    <string name="casual_mode_subtitle">(가벼운 음주용)</string>
+    <string name="casual_mode_description">파티? 사랑하는 사람들과 축하하세요.</string>
+    <string name="change_button">변경</string>
+    <string name="activate_button">활성화</string>
+
+    <string name="activated_casual_mode_title">캐주얼 모드가 활성화되었습니다.</string>
+    <string name="activated_casual_mode_description">친구들과 즐겁게 마시세요.</string>
+    <string name="locked_button">잠김</string>
+
+    <string name="serious_mode_title">이것은 진지한 모드입니다.</string>
+    <string name="serious_mode_description">혼자서 과음하시겠습니까?</string>
+    <string name="activated_serious_mode_title">진지한 모드가 활성화되었습니다.</string>
+    <string name="activated_serious_mode_description">잘 마시고 안전하게 지내세요.</string>
+
+    <string name="settings_title">설정</string>
+    <string name="settings_section_safety">안전</string>
+    <string name="settings_item_change_pin">PIN 변경</string>
+    <string name="settings_item_test_difficulty">난이도 테스트</string>
+    <string name="settings_section_account">계정</string>
+    <string name="settings_item_privacy_policy">개인정보 보호정책</string>
+    <string name="settings_item_terms_conditions">이용약관</string>
+    <string name="settings_item_customer_support">고객 지원</string>
+    <string name="settings_section_in_app">앱 내</string>
+    <string name="settings_item_languages">언어</string>
+
+    <string name="menu_home">홈</string>
+    <string name="menu_app_list">앱 목록</string>
+    <string name="menu_community">커뮤니티</string>
+    <string name="menu_coming_soon">출시 예정</string>
+    <string name="menu_settings">설정</string>
+    <string name="menu_header_part1">"술에서 오는 자신감은 잠시 빌리는 것일 뿐입니다. "</string>
+    <string name="menu_header_part2">진정한 자신감은 당신의 것입니다</string>
+    <string name="menu_subtitle">음주 지식</string>
+    
+    <string-array name="motivational_quotes">
+        <item>"대학생의 절반 이상이 술에 취했을 때 기억을 잃은 경험이 있습니다"</item>
+        <item>"괜찮지 않아도 괜찮습니다. 누군가에게 손을 내미는 것은 약함이 아니라 힘의 표시입니다"</item>
+        <item>"때로는 연결감을 느끼기 위해 술을 마십니다. 짧은 대화라도 실제 대화가 훨씬 효과적입니다"</item>
+        <item>"술에서 오는 자신감은 잠시 빌리는 것일 뿐입니다. 진정한 자신감은 당신의 것입니다"</item>
+        <item>"과음은 숙면을 방해하여 다음 날 모든 것을 더 힘들게 만듭니다"</item>
+        <item>"지금 마시는 물 한 잔은 미래의 자신에게 보내는 하이파이브입니다. 진심으로, 그들은 당신에게 감사할 것입니다"</item>
+        <item>"신체는 시간당 약 한 잔의 음료를 처리합니다. 그 이상은 처리 대기 중일 뿐입니다"</item>
+        <item>"무언가를 잊기 위해 술을 마시나요? 뇌는 감정을 삭제하는 것이 아니라 잠시 멈추는 것뿐입니다"</item>
+        <item>"우울하신가요? 알코올은 우울제이므로 내일 외로움을 더 무겁게 만들 수 있습니다"</item>
+        <item>"친구에게 보내는 빠른 문자는 다음 술잔보다 더 좋고 오래 지속되는 활력을 줄 수 있습니다"</item>
+    </string-array>
+
+    <string-array name="motivational_quotes_highlights">
+        <item>"기억을 잃은"</item>
+        <item>"힘의 표시"</item>
+        <item>"훨씬 효과적입니다"</item>
+        <item>"진정한 자신감은 당신의 것"</item>
+        <item>"더 힘들게 만듭니다"</item>
+        <item>"당신에게 감사할 것입니다"</item>
+        <item>"처리 대기 중"</item>
+        <item>"삭제하는 것이 아니라"</item>
+        <item>"더 무겁게 만들 수 있습니다"</item>
+        <item>"친구에게 보내는 빠른 문자"</item>
+    </string-array>
+</resources>

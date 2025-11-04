@@ -7,7 +7,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,7 +27,6 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalBottomSheet
@@ -46,16 +44,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import dev.ace.applock.R
-import dev.ace.applock.core.navigation.Screen
 import dev.ace.applock.core.utils.appLockRepository
 import dev.ace.applock.core.utils.isAccessibilityServiceEnabled
 import dev.ace.applock.core.utils.openAccessibilitySettings
@@ -307,7 +301,7 @@ private fun SeriousModeScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Drinking Mode",
+                text = stringResource(id = R.string.app_name),
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
             )
@@ -316,12 +310,12 @@ private fun SeriousModeScreen(
                 shape = RoundedCornerShape(50),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF06262))
             ) {
-                Text(text = "Get Consult")
+                Text(text = stringResource(id = R.string.get_consult))
             }
         }
         Spacer(modifier = Modifier.height(64.dp))
         Text(
-            text = "This is Serious Mode.",
+            text = stringResource(id = R.string.serious_mode_title),
             color = Color(0xFFD32F2F), // Red color from image
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
@@ -335,7 +329,7 @@ private fun SeriousModeScreen(
          )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "Are You Going To\nDrink Heavily Alone?",
+            text = stringResource(id = R.string.serious_mode_description),
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp,
             modifier = Modifier.padding(horizontal = 32.dp),
@@ -363,7 +357,7 @@ private fun SeriousModeScreen(
                     modifier = Modifier.size(24.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "Activate", color = Color.White)
+                Text(text = stringResource(id = R.string.activate_button), color = Color.White)
             }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -417,7 +411,7 @@ private fun ActivatedScreen(onDeactivate: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Drinking Mode",
+                text = stringResource(id = R.string.app_name),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
                 color = Color.White,
@@ -426,12 +420,12 @@ private fun ActivatedScreen(onDeactivate: () -> Unit) {
                 onClick = { /*TODO*/ },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.White.copy(alpha = 0.2f))
             ) {
-                Text(text = "Get Consult", color = Color.White)
+                Text(text = stringResource(id = R.string.get_consult), color = Color.White)
             }
         }
         Spacer(modifier = Modifier.height(48.dp))
         Text(
-            text = "Casual Mode Activated.",
+            text = stringResource(id = R.string.activated_casual_mode_title),
             color = Color.White,
             fontWeight = FontWeight.Bold,
             fontSize = 18.sp,
@@ -445,7 +439,7 @@ private fun ActivatedScreen(onDeactivate: () -> Unit) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "Have Fun Drinking\nwith your friends.",
+            text = stringResource(id = R.string.activated_casual_mode_description),
             color = Color.White,
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp,
@@ -461,7 +455,7 @@ private fun ActivatedScreen(onDeactivate: () -> Unit) {
             border = BorderStroke(1.dp, Color.White),
             contentPadding = PaddingValues(vertical = 16.dp, horizontal = 32.dp)
         ) {
-            Text("LOCKED", color = Color.White)
+            Text(stringResource(id = R.string.locked_button), color = Color.White)
             Spacer(Modifier.width(8.dp))
             Icon(Icons.Default.Lock, contentDescription = "Locked", tint = Color.White)
         }
@@ -487,7 +481,7 @@ private fun SeriousModeActivatedScreen(onDeactivate: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Drinking Mode",
+                text = stringResource(id = R.string.app_name),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
                 color = Color.White,
@@ -497,12 +491,12 @@ private fun SeriousModeActivatedScreen(onDeactivate: () -> Unit) {
                 shape = RoundedCornerShape(50),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.White.copy(alpha = 0.2f))
             ) {
-                Text(text = "Get Consult", color = Color.White)
+                Text(text = stringResource(id = R.string.get_consult), color = Color.White)
             }
         }
         Spacer(modifier = Modifier.height(48.dp))
         Text(
-            text = "Serious Mode Activated.",
+            text = stringResource(id = R.string.activated_serious_mode_title),
             color = Color.White,
             fontWeight = FontWeight.Bold,
             fontSize = 18.sp,
@@ -516,7 +510,7 @@ private fun SeriousModeActivatedScreen(onDeactivate: () -> Unit) {
          )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "Drink Well, Stay Safe.",
+            text = stringResource(id = R.string.activated_serious_mode_description),
             color = Color.White,
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp,
@@ -533,90 +527,10 @@ private fun SeriousModeActivatedScreen(onDeactivate: () -> Unit) {
             border = BorderStroke(1.dp, Color.White),
             contentPadding = PaddingValues(vertical = 16.dp, horizontal = 32.dp)
         ) {
-            Text("LOCKED", color = Color.White)
+            Text(stringResource(id = R.string.locked_button), color = Color.White)
             Spacer(Modifier.width(8.dp))
             Icon(Icons.Default.Lock, contentDescription = "Locked", tint = Color.White)
         }
         Spacer(modifier = Modifier.height(32.dp))
-    }
-}
-
-@Composable
-internal fun MenuBottomSheetContent(navController: NavController, onDismiss: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 32.dp, vertical = 48.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
-    ) {
-        // ... (Content from original MenuBottomSheetContent)
-        Column(modifier = Modifier.padding(bottom = 16.dp)) {
-            Text(
-                buildAnnotatedString {
-                    append("\"Over Half Of The University Students Experienced ")
-                    withStyle(style = SpanStyle(color = Color(0xFF32CD32))) {
-                        append("Blackouts")
-                    }
-                    append(" While Drunk\"")
-                },
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                lineHeight = 48.sp
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "Drinking Knowledge",
-                color = Color.White,
-                fontSize = 14.sp
-            )
-        }
-        HorizontalDivider(color = Color.Gray, thickness = 1.dp)
-
-        Text(
-            "Home",
-            color = Color(0xFFF5F5DC), // Creamy white
-            fontWeight = FontWeight.Bold,
-            fontSize = 22.sp,
-            modifier = Modifier.clickable {
-                onDismiss()
-                navController.navigate(Screen.Home.route) {
-                    popUpTo(Screen.Home.route) { inclusive = true }
-                    launchSingleTop = true
-                }
-            }
-        )
-        Text(
-            "App List",
-            color = Color(0xFFF5F5DC),
-            fontWeight = FontWeight.Bold,
-            fontSize = 22.sp,
-            modifier = Modifier.clickable {
-                onDismiss()
-                navController.navigate(Screen.Main.route) {
-                    popUpTo(Screen.Main.route) { inclusive = true }
-                    launchSingleTop = true
-                }
-            }
-        )
-        Column {
-            Text(
-                "Community",
-                color = Color.Gray, // Disabled look
-                fontWeight = FontWeight.Bold,
-                fontSize = 22.sp,
-            )
-            Text("Coming Soon", color = Color.Gray, fontSize = 14.sp)
-        }
-        Text(
-            "Setting",
-            color = Color(0xFFF5F5DC),
-            fontWeight = FontWeight.Bold,
-            fontSize = 22.sp,
-            modifier = Modifier.clickable {
-                onDismiss()
-                navController.navigate(Screen.Settings.route)
-            }
-        )
     }
 }
