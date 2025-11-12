@@ -1,3 +1,4 @@
+
 package dev.ace.applock.features.lockscreen.ui
 
 import android.content.Context
@@ -241,12 +242,9 @@ class PasswordOverlayActivity : FragmentActivity() {
                         preferencesRepository = application.preferencesRepository,
                         onWordAttempt = { word ->
                             val currentWordToType = typingGameViewModel.uiState.value.wordToType
-                            val isValid = word.equals(currentWordToType, ignoreCase = true)
-                            if (isValid) {
-                                onUnlockSuccess()
-                            }
-                            isValid
-                        }
+                            word.equals(currentWordToType, ignoreCase = true)
+                        },
+                        onUnlock = { onUnlockSuccess() }
                     )
                 }
             }

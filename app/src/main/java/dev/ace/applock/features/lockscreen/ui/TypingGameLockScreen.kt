@@ -1,3 +1,4 @@
+
 package dev.ace.applock.features.lockscreen.ui
 
 import androidx.compose.foundation.background
@@ -28,7 +29,6 @@ import dev.ace.applock.data.repository.PreferencesRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlin.random.Random
 
 // ViewModel to manage the state of the Typing Game Lock Screen
 class TypingGameViewModel(private val preferencesRepository: PreferencesRepository) : ViewModel() {
@@ -50,8 +50,6 @@ class TypingGameViewModel(private val preferencesRepository: PreferencesReposito
         return getWordListForDifficulty(difficulty).random()
     }
     
-    private var wordsTypedCount = 0
-
     // Initialize the state with the first word directly.
     private val _uiState = MutableStateFlow(
         TypingGameUiState(wordToType = getRandomWord())
@@ -75,12 +73,13 @@ class TypingGameViewModel(private val preferencesRepository: PreferencesReposito
         }
     }
 
-    fun onUnlockClicked(onAttempt: (String) -> Boolean) {
+    fun onUnlockClicked(onAttempt: (String) -> Boolean, onUnlock: () -> Unit) {
         val isCorrect = onAttempt(_uiState.value.inputText.text)
         if (isCorrect) {
-            wordsTypedCount++
-            if (wordsTypedCount == 3) {
-                // Unlock the app
+            val newWordsTypedCount = _uiState.value.wordsTypedCount + 1
+            _uiState.update { it.copy(wordsTypedCount = newWordsTypedCount) }
+            if (newWordsTypedCount == 3) {
+                onUnlock()
             } else {
                 generateNewWord()
             }
@@ -94,14 +93,16 @@ class TypingGameViewModel(private val preferencesRepository: PreferencesReposito
 data class TypingGameUiState(
     val wordToType: String = "",
     val inputText: TextFieldValue = TextFieldValue(""),
-    val isError: Boolean = false
+    val isError: Boolean = false,
+    val wordsTypedCount: Int = 0
 )
 
 // Composable for the Typing Game Lock Screen
 @Composable
 fun TypingGameLockScreen(
     preferencesRepository: PreferencesRepository,
-    onWordAttempt: (String) -> Boolean
+    onWordAttempt: (String) -> Boolean,
+    onUnlock: () -> Unit
 ) {
     val viewModel: TypingGameViewModel = viewModel(factory = TypingGameViewModelFactory(preferencesRepository))
     val uiState by viewModel.uiState.collectAsState()
@@ -153,10 +154,11 @@ fun TypingGameLockScreen(
 
             // Page indicators
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                repeat(3) {
+                repeat(3) { index ->
+                    val color = if (index < uiState.wordsTypedCount) MaterialTheme.colorScheme.primary else Color.Gray
                     Box(modifier = Modifier
                         .size(10.dp)
-                        .background(Color.Gray, CircleShape))
+                        .background(color, CircleShape))
                 }
             }
 
@@ -165,7 +167,7 @@ fun TypingGameLockScreen(
 
             // This button replaces the auto-unlock logic to prevent bugs
             Button(
-                onClick = { viewModel.onUnlockClicked(onWordAttempt) },
+                onClick = { viewModel.onUnlockClicked(onWordAttempt, onUnlock) },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
                 contentPadding = PaddingValues(vertical = 16.dp),
