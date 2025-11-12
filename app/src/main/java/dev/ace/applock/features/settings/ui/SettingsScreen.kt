@@ -1,3 +1,4 @@
+
 package dev.ace.applock.features.settings.ui
 
 import androidx.compose.foundation.clickable
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -67,60 +69,72 @@ fun SettingsScreen(navController: NavController) {
             }
         }
     ) { innerPadding ->
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
                 .padding(24.dp)
         ) {
-            Text(
-                text = stringResource(id = R.string.settings_title),
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 24.dp)
-            )
-
-            SettingsCard(title = stringResource(id = R.string.settings_section_safety)) {
-                SettingsRow(
-                    icon = Icons.Default.Security,
-                    text = stringResource(id = R.string.settings_item_change_pin),
-                    onClick = { navController.navigate(Screen.ChangePassword.route) }
-                )
-                SettingsRow(
-                    icon = Icons.Default.Vibration,
-                    text = stringResource(id = R.string.settings_item_test_difficulty),
-                    onClick = { navController.navigate(Screen.TestDifficulty.route) }
+            item {
+                Text(
+                    text = stringResource(id = R.string.settings_title),
+                    fontSize = 32.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(bottom = 24.dp)
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
-
-            SettingsCard(title = stringResource(id = R.string.settings_section_account)) {
-                SettingsRow(
-                    icon = Icons.Default.Policy,
-                    text = stringResource(id = R.string.settings_item_privacy_policy),
-                    onClick = { /* TODO */ }
-                )
-                SettingsRow(
-                    icon = Icons.Default.Policy, // Using same icon as placeholder
-                    text = stringResource(id = R.string.settings_item_terms_conditions),
-                    onClick = { /* TODO */ }
-                )
-                SettingsRow(
-                    icon = Icons.Default.SupportAgent,
-                    text = stringResource(id = R.string.settings_item_customer_support),
-                    onClick = { navController.navigate(Screen.ContactSupport.route) }
-                )
+            item {
+                SettingsCard(title = stringResource(id = R.string.settings_section_safety)) {
+                    SettingsRow(
+                        icon = Icons.Default.Security,
+                        text = stringResource(id = R.string.settings_item_change_pin),
+                        onClick = { navController.navigate(Screen.ChangePassword.route) }
+                    )
+                    SettingsRow(
+                        icon = Icons.Default.Vibration,
+                        text = stringResource(id = R.string.settings_item_test_difficulty),
+                        onClick = { navController.navigate(Screen.TestDifficulty.route) }
+                    )
+                }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            item {
+                Spacer(modifier = Modifier.height(24.dp))
+            }
 
-            SettingsCard(title = stringResource(id = R.string.settings_section_in_app)) {
-                SettingsRow(
-                    icon = Icons.Default.Language,
-                    text = stringResource(id = R.string.settings_item_languages),
-                    onClick = { navController.navigate(Screen.Language.route) }
-                )
+            item {
+                SettingsCard(title = stringResource(id = R.string.settings_section_account)) {
+                    SettingsRow(
+                        icon = Icons.Default.Policy,
+                        text = stringResource(id = R.string.settings_item_privacy_policy),
+                        onClick = { /* TODO */ }
+                    )
+                    SettingsRow(
+                        icon = Icons.Default.Policy, // Using same icon as placeholder
+                        text = stringResource(id = R.string.settings_item_terms_conditions),
+                        onClick = { /* TODO */ }
+                    )
+                    SettingsRow(
+                        icon = Icons.Default.SupportAgent,
+                        text = stringResource(id = R.string.settings_item_customer_support),
+                        onClick = { navController.navigate(Screen.ContactSupport.route) }
+                    )
+                }
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(24.dp))
+            }
+
+            item {
+                SettingsCard(title = stringResource(id = R.string.settings_section_in_app)) {
+                    SettingsRow(
+                        icon = Icons.Default.Language,
+                        text = stringResource(id = R.string.settings_item_languages),
+                        onClick = { navController.navigate(Screen.Language.route) }
+                    )
+                }
             }
         }
     }
@@ -188,3 +202,4 @@ private fun SettingsRow(
         }
     }
 }
+
