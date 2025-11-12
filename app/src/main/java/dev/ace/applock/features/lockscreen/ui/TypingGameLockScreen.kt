@@ -107,6 +107,7 @@ fun TypingGameLockScreen(
     val viewModel: TypingGameViewModel = viewModel(factory = TypingGameViewModelFactory(preferencesRepository))
     val uiState by viewModel.uiState.collectAsState()
     val focusRequester = remember { FocusRequester() }
+    val customColor = Color(0xFF01A87B)
 
     // Request focus for the keyboard to appear automatically
     LaunchedEffect(Unit) {
@@ -155,7 +156,7 @@ fun TypingGameLockScreen(
             // Page indicators
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 repeat(3) { index ->
-                    val color = if (index < uiState.wordsTypedCount) MaterialTheme.colorScheme.primary else Color.Gray
+                    val color = if (index < uiState.wordsTypedCount) customColor else Color.Gray
                     Box(modifier = Modifier
                         .size(10.dp)
                         .background(color, CircleShape))
@@ -171,8 +172,10 @@ fun TypingGameLockScreen(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
                 contentPadding = PaddingValues(vertical = 16.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = customColor)
             ) {
-                Text("Unlock", fontSize = 18.sp)
+                val buttonText = if (uiState.wordsTypedCount < 2) "Next" else "Unlock"
+                Text(buttonText, fontSize = 18.sp)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
